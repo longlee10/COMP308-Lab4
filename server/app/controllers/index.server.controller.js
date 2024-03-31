@@ -8,7 +8,7 @@ const iris = require("../../iris.json");
 const irisTesting = require("../../iris-testing.json");
 
 // build neural network using a sequential model
-const createModel = () => {
+const createModel = (learningRate = 0.06) => {
   const model = tf.sequential();
   // Add the first layer with relu activation
   model.add(
@@ -41,7 +41,7 @@ const createModel = () => {
   );
   // Compile the model
   model.compile({
-    optimizer: tf.train.adam(0.06), // Experiment with different learning rates
+    optimizer: tf.train.adam(learningRate), // Experiment with different learning rates
     loss: "categoricalCrossentropy", // Use categoricalCrossentropy for multi-class classification
     metrics: ["accuracy"], // Include accuracy as a metric for evaluation
   });
@@ -50,11 +50,17 @@ const createModel = () => {
 };
 
 // Train the model and predict the results for testing data
-const trainModel = async (model, trainingData, outputData, testingData) => {
+const trainModel = async (
+  model,
+  trainingData,
+  outputData,
+  testingData,
+  noOfEpochs = 100
+) => {
   const startTime = Date.now();
   // train/fit the model for the fixed number of epochs
   await model.fit(trainingData, outputData, {
-    epochs: 100,
+    epochs: noOfEpochs,
     callbacks: {
       //list of callbacks to be called during training
       onEpochEnd: async (epoch, log) => {
@@ -147,7 +153,7 @@ const predictTestingData = async function (req, res) {
 };
 
 const predictInputData = async function (req, res) {
-  const irisTesting = req.body;
+  const { irisTesting, learningRate, noOfEpochs } = req.body;
   console.log(irisTesting);
 
   // convert/setup our data for tensorflow.js
@@ -185,7 +191,7 @@ const predictInputData = async function (req, res) {
   );
 
   // create neural network
-  const model = createModel();
+  const model = createModel(learningRate);
   console.log(model.summary());
 
   //Train the model and predict the results for testing data
@@ -193,7 +199,8 @@ const predictInputData = async function (req, res) {
     model,
     trainingData,
     outputData,
-    testingData
+    testingData,
+    noOfEpochs
   );
   res.status(200).send(predictedData);
 };
