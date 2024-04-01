@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div>
+      <h1>Home</h1>
+      <Link className="btn btn-primary" to={"/view"}>
+        View Testing Data
+      </Link>
+      <br />
       <Link className="btn btn-primary" to={"/input"}>
-        Add Training Data
+        Enter New Data
       </Link>
     </div>
   );
