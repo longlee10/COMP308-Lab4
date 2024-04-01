@@ -75,13 +75,13 @@ const Input = ({ setData }) => {
 
         <Form.Group>
           <Form.Label>Epochs</Form.Label>
-          <Form.Control type="number" placeholder="Epochs" ref={epochs} />
+          <Form.Control type="text" placeholder="Epochs" ref={epochs} />
         </Form.Group>
 
         <Form.Group>
           <Form.Label>Learning Rate</Form.Label>
           <Form.Control
-            type="number"
+            type="text"
             placeholder="Learning Rate"
             ref={learningRate}
           />
