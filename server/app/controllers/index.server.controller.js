@@ -21,7 +21,7 @@ const createModel = (learningRate = 0.06) => {
   // Add 2nd dense layer (optional, experiment with adding or removing layers)
   model.add(
     tf.layers.dense({
-      units: 10, // Experiment with the number of units
+      units: 8, // Experiment with the number of units
       activation: "relu",
     })
   );
