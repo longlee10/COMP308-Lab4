@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <Link className="btn btn-primary" to={"/view"}>
+    <div className="d-flex flex-column align-items-center">
+      <h2 className="mb-3">Welcome to plant prediction center!</h2>
+
+      <Link className="btn btn-primary mb-3" to={"/view"}>
         View Testing Data
       </Link>
-      <br />
+
       <Link className="btn btn-primary" to={"/input"}>
         Enter New Data
       </Link>

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import { Link } from "react-router-dom";
+import DefinitionOfValues from "./DefinitionOfValues";
+import determineSpecies from "../determineSpecies";
 
 function Predefined() {
   const [data, setData] = useState({});
@@ -22,32 +25,6 @@ function Predefined() {
     fetchData();
   }, []);
 
-  // Function to determine species based on values
-  const determineSpecies = (values) => {
-    const threshold = 0.5; // You can adjust this threshold based on your specific scenario
-    if (
-      values[0] >= threshold &&
-      values[1] < threshold &&
-      values[2] < threshold
-    ) {
-      return "setosa";
-    } else if (
-      values[0] < threshold &&
-      values[1] >= threshold &&
-      values[2] < threshold
-    ) {
-      return "virginica";
-    } else if (
-      values[0] < threshold &&
-      values[1] < threshold &&
-      values[2] >= threshold
-    ) {
-      return "versicolor";
-    } else {
-      return "Unknown"; // Add a default case or handle other scenarios as needed
-    }
-  };
-
   return (
     <div>
       {showLoading === false ? (
@@ -58,16 +35,15 @@ function Predefined() {
             </Spinner>
           )}
 
-          <h1>Prediction Results</h1>
-
           {/* Table for Test Results */}
+          <h2>Prediction Results</h2>
           <table className="App-table">
             <thead>
               <tr>
                 <th className="App-th">Test 1</th>
                 <th className="App-th">Test 2</th>
                 <th className="App-th">Test 3</th>
-                <th className="App-th">Species</th> {/* New Column */}
+                <th className="App-th">Species</th>
               </tr>
             </thead>
 
@@ -105,30 +81,11 @@ function Predefined() {
           </table>
 
           {/* Table for Species Values */}
-          <h2>Definition of Values for Species</h2>
-          <table className="App-table">
-            <thead>
-              <tr>
-                <th className="App-th">Species</th>
-                <th className="App-th">Values</th>
-              </tr>
-            </thead>
+          <DefinitionOfValues />
 
-            <tbody>
-              <tr>
-                <td className="App-td">setosa</td>
-                <td className="App-td">1, 0, 0</td>
-              </tr>
-              <tr>
-                <td className="App-td">virginica</td>
-                <td className="App-td">0, 1, 0</td>
-              </tr>
-              <tr>
-                <td className="App-td">versicolor</td>
-                <td className="App-td">0, 0, 1</td>
-              </tr>
-            </tbody>
-          </table>
+          <Link className="btn btn-primary mt-3" to="/input">
+            Enter new data
+          </Link>
         </div>
       ) : (
         <div>
