@@ -1,23 +1,19 @@
-import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
-import Result from "./components/Result";
 import Home from "./components/Home";
 import Input from "./components/Input";
 import Predefined from "./components/Predefined";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
-  const [data, setData] = useState({});
-
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/view" element={<Predefined />} />
-          <Route path="/result" element={<Result data={data} />} />
-          <Route path="/input" element={<Input setData={setData} />} />
+          <Route path="/input" element={<Input />} />
         </Routes>
       </div>
     </Router>

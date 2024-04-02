@@ -37,7 +37,7 @@ function Predefined() {
 
           {/* Table for Test Results */}
           <h2>Prediction Results</h2>
-          <table className="App-table">
+          <table className="App-table mb-5">
             <thead>
               <tr>
                 <th className="App-th">Test 1</th>
