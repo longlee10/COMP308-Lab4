@@ -35,7 +35,6 @@ function Predefined() {
             </Spinner>
           )}
 
-          {/* Table for Test Results */}
           <h2>Prediction Results</h2>
           <table className="App-table mb-5">
             <thead>
@@ -80,7 +79,6 @@ function Predefined() {
             </tbody>
           </table>
 
-          {/* Table for Species Values */}
           <DefinitionOfValues />
 
           <Link className="btn btn-primary mt-3" to="/input">
